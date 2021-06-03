@@ -16,7 +16,7 @@ class QuestionDetailViewMvc(
         R.layout.layout_question_details) {
 
     interface Listener {
-        fun onBackPressed()
+        fun onBackKeyPressed()
     }
 
     private val toolbar: MyToolbar = findViewById(R.id.toolbar)
@@ -28,7 +28,7 @@ class QuestionDetailViewMvc(
         // init toolbar
         toolbar.setNavigateUpListener {
             for (listener in listeners) {
-                listener.onBackPressed()
+                listener.onBackKeyPressed()
             }
         }
         // init pull-down-to-refresh (used as a progress indicator)

@@ -22,6 +22,11 @@ class FetchQuestionsUseCase {
         object FAIL : Result()
     }
 
+    sealed class ResultDetail {
+        class SUCCESS(val questionBody: String) : ResultDetail()
+        object FAIL : ResultDetail()
+    }
+
     suspend fun fetchLatestQuestions(): Result {
         return withContext(Dispatchers.IO) {
             try {
@@ -34,6 +39,26 @@ class FetchQuestionsUseCase {
             } catch (t: Throwable) {
                 if (t !is CancellationException) {
                     return@withContext Result.FAIL
+                } else {
+                    throw t
+                }
+            }
+        }
+    }
+
+    suspend fun fetchQuestionDetails(questionId: String?): ResultDetail {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = stackoverflowApi.questionDetails(questionId)
+                if (response.isSuccessful && response.body() != null) {
+                    val questionBody = response.body()!!.question.body
+                    return@withContext ResultDetail.SUCCESS(questionBody)
+                } else {
+                    return@withContext ResultDetail.FAIL
+                }
+            } catch (t: Throwable) {
+                if (t !is CancellationException) {
+                    return@withContext ResultDetail.FAIL
                 } else {
                     throw t
                 }
