@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import com.techyourchance.dagger2course.questions.FetchQuestionsUseCase
 import com.techyourchance.dagger2course.questions.Question
-import com.techyourchance.dagger2course.screens.common.dialogs.ServerErrorDialogFragment
+import com.techyourchance.dagger2course.screens.common.dialogs.DialogNavigator
 import com.techyourchance.dagger2course.screens.questiondetails.QuestionDetailsActivity
 import kotlinx.coroutines.*
 
@@ -19,12 +19,15 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
 
     private lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
 
+    private lateinit var dialogNavigator: DialogNavigator
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         viewMvc = QuestionsListViewMvc(LayoutInflater.from(this), null)
         setContentView(viewMvc.rootView)
         fetchQuestionsUseCase = FetchQuestionsUseCase()
+        dialogNavigator = DialogNavigator(supportFragmentManager)
     }
 
     override fun onStart() {
@@ -62,9 +65,7 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
     }
 
     private fun onFetchFailed() {
-        supportFragmentManager.beginTransaction()
-                .add(ServerErrorDialogFragment.newInstance(), null)
-                .commitAllowingStateLoss()
+        dialogNavigator.showServerErrorDialog()
     }
 
     override fun onRefreshClicked() {
