@@ -82,7 +82,7 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
         fetchQuestions()
     }
 
-    override fun onQuestionClicked(clickedQuestion: Question) {
+    override fun onQuestionClick(clickedQuestion: Question) {
         QuestionDetailsActivity.start(this, clickedQuestion.id)
     }
 }
