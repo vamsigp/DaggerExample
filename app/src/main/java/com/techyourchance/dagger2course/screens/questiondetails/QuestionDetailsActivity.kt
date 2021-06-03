@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import com.techyourchance.dagger2course.questions.FetchQuestionsUseCase
+import com.techyourchance.dagger2course.screens.common.ScreenNavigator
 import com.techyourchance.dagger2course.screens.common.dialogs.DialogNavigator
-import com.techyourchance.dagger2course.screens.common.dialogs.ServerErrorDialogFragment
 import kotlinx.coroutines.*
 
 class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailViewMvc.Listener {
@@ -18,6 +18,7 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailViewMvc.Liste
     private lateinit var viewMvc: QuestionDetailViewMvc
     private lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
     private lateinit var dialogNavigator: DialogNavigator
+    private lateinit var screenNavigator: ScreenNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,11 +26,12 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailViewMvc.Liste
         viewMvc = QuestionDetailViewMvc(LayoutInflater.from(this), null)
         setContentView(viewMvc.rootView)
 
-        fetchQuestionsUseCase = FetchQuestionsUseCase()
-        dialogNavigator = DialogNavigator(supportFragmentManager)
-
         // retrieve question ID passed from outside
         questionId = intent.extras!!.getString(EXTRA_QUESTION_ID)!!
+
+        fetchQuestionsUseCase = FetchQuestionsUseCase()
+        dialogNavigator = DialogNavigator(supportFragmentManager)
+        screenNavigator = ScreenNavigator(this)
     }
 
     override fun onStart() {
@@ -67,7 +69,7 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailViewMvc.Liste
     }
 
     override fun onBackKeyPressed() {
-        onBackPressed()
+        screenNavigator.navigateBack()
     }
 
     companion object {
