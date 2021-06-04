@@ -30,7 +30,7 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailViewMvc.Liste
         // retrieve question ID passed from outside
         questionId = intent.extras!!.getString(EXTRA_QUESTION_ID)!!
 
-        fetchQuestionsUseCase = FetchQuestionsUseCase((application as MyApplication).retrofit)
+        fetchQuestionsUseCase = FetchQuestionsUseCase((application as MyApplication).stackoverflowApi)
         dialogNavigator = DialogNavigator(supportFragmentManager)
         screenNavigator = ScreenNavigator(this)
     }

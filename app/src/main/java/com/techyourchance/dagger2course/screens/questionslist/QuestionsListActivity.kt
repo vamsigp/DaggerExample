@@ -25,7 +25,8 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
 
         viewMvc = QuestionsListViewMvc(LayoutInflater.from(this), null)
         setContentView(viewMvc.rootView)
-        fetchQuestionsUseCase = FetchQuestionsUseCase((application as MyApplication).retrofit)
+        fetchQuestionsUseCase =
+            FetchQuestionsUseCase((application as MyApplication).stackoverflowApi)
         dialogNavigator = DialogNavigator(supportFragmentManager)
         screenNavigator = ScreenNavigator(this)
     }
