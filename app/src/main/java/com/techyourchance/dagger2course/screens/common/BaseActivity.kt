@@ -6,8 +6,7 @@ import com.techyourchance.dagger2course.screens.common.composition.ActivityCompo
 
 open class BaseActivity : AppCompatActivity() {
 
-    val compositionRoot get() = (application as MyApplication).appCompositionRoot
+    private val appCompositionRoot get() = (application as MyApplication).appCompositionRoot
 
-    val activityCompositionRoot get() = ActivityCompositionRoot(this)
-
+    val compositionRoot get() = ActivityCompositionRoot(this, appCompositionRoot)
 }

@@ -26,7 +26,7 @@ class QuestionsListActivity : BaseActivity(), QuestionsListViewMvc.Listener {
         setContentView(viewMvc.rootView)
         fetchQuestionsUseCase = compositionRoot.fetchQuestionsUseCase
         dialogNavigator = DialogNavigator(supportFragmentManager)
-        screenNavigator = activityCompositionRoot.screenNavigator
+        screenNavigator = compositionRoot.screenNavigator
     }
 
     override fun onStart() {
