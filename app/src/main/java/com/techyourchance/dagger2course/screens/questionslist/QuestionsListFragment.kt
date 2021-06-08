@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.techyourchance.dagger2course.questions.FetchQuestionsUseCase
 import com.techyourchance.dagger2course.questions.Question
-import com.techyourchance.dagger2course.screens.common.BaseActivity
 import com.techyourchance.dagger2course.screens.common.ScreenNavigator
 import com.techyourchance.dagger2course.screens.common.dialogs.DialogNavigator
 import com.techyourchance.dagger2course.screens.common.fragments.BaseFragment
@@ -32,8 +31,8 @@ class QuestionsListFragment : BaseFragment(), QuestionsListViewMvc.Listener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        viewMvc = QuestionsListViewMvc(LayoutInflater.from(requireContext()), null)
+    ): View {
+        viewMvc = compositionRoot.viewMvcFactory.createNewQuestionListMvc(container)
         return viewMvc.rootView
     }
 
