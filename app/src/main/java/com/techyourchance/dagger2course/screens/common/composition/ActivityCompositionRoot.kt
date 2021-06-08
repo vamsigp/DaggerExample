@@ -1,6 +1,5 @@
 package com.techyourchance.dagger2course.screens.common.composition
 
-import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import com.techyourchance.dagger2course.questions.FetchQuestionsUseCase
 import com.techyourchance.dagger2course.screens.common.ScreenNavigator
