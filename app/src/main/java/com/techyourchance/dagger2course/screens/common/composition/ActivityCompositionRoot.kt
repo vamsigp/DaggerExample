@@ -11,20 +11,13 @@ class ActivityCompositionRoot(
     private val activity: AppCompatActivity,
     private val appCompositionRoot: AppCompositionRoot
 ) {
-
     val screenNavigator by lazy {
         ScreenNavigator(activity)
     }
 
-    private val stackoverflowApi get() = appCompositionRoot.stackoverflowApi
+    val fragmentManager get() = activity.supportFragmentManager
 
-    val fetchQuestionsUseCase get() = FetchQuestionsUseCase(stackoverflowApi)
+    val stackoverflowApi get() = appCompositionRoot.stackoverflowApi
 
-    private val fragmentManager get() = activity.supportFragmentManager
-
-    val dialogNavigator get() = DialogNavigator(fragmentManager)
-
-    private val layoutInflater get() = LayoutInflater.from(activity)
-
-    val viewMvcFactory get() = ViewMvcFactory(layoutInflater)
+    val layoutInflater get() = LayoutInflater.from(activity)
 }
