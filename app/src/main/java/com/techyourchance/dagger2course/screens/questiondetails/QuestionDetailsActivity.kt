@@ -3,7 +3,6 @@ package com.techyourchance.dagger2course.screens.questiondetails
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import com.techyourchance.dagger2course.questions.FetchQuestionsUseCase
 import com.techyourchance.dagger2course.screens.common.BaseActivity
 import com.techyourchance.dagger2course.screens.common.ScreenNavigator
@@ -23,7 +22,7 @@ class QuestionDetailsActivity : BaseActivity(), QuestionDetailViewMvc.Listener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewMvc = QuestionDetailViewMvc(LayoutInflater.from(this), null)
+        viewMvc = compositionRoot.viewMvcFactory.createNewQuestionDetailsMvc(null)
         setContentView(viewMvc.rootView)
 
         // retrieve question ID passed from outside
