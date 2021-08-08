@@ -19,5 +19,5 @@ class ActivityCompositionRoot(
 
     val stackoverflowApi get() = appCompositionRoot.stackoverflowApi
 
-    val layoutInflater get() = LayoutInflater.from(activity)
+    val layoutInflater: LayoutInflater get() = LayoutInflater.from(activity)
 }
