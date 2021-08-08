@@ -1,4 +1,4 @@
-package com.techyourchance.dagger2course.screens.common.composition
+package com.techyourchance.dagger2course.screens.common.dependencyinjection
 
 import com.techyourchance.dagger2course.questions.FetchQuestionsUseCase
 import com.techyourchance.dagger2course.screens.common.dialogs.DialogNavigator
