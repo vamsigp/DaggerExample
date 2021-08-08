@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.techyourchance.dagger2course.questions.FetchQuestionsUseCase
 import com.techyourchance.dagger2course.screens.common.BaseActivity
 import com.techyourchance.dagger2course.screens.common.ScreenNavigator
+import com.techyourchance.dagger2course.screens.common.dependencyinjection.Service
 import com.techyourchance.dagger2course.screens.common.dialogs.DialogNavigator
 import com.techyourchance.dagger2course.screens.common.viewmvc.ViewMvcFactory
 import kotlinx.coroutines.*
@@ -14,10 +15,10 @@ class QuestionDetailsActivity : BaseActivity(), QuestionDetailViewMvc.Listener {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
-    lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
-    lateinit var dialogNavigator: DialogNavigator
-    lateinit var screenNavigator: ScreenNavigator
-    lateinit var viewMvcFactory: ViewMvcFactory
+    @Service private lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
+    @Service private lateinit var dialogNavigator: DialogNavigator
+    @Service private lateinit var screenNavigator: ScreenNavigator
+    @Service private lateinit var viewMvcFactory: ViewMvcFactory
 
     private lateinit var viewMvc: QuestionDetailViewMvc
 
