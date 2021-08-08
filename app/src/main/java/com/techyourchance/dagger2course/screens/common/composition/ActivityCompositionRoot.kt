@@ -8,12 +8,14 @@ import com.techyourchance.dagger2course.screens.common.dialogs.DialogNavigator
 import com.techyourchance.dagger2course.screens.common.viewmvc.ViewMvcFactory
 
 class ActivityCompositionRoot(
-    private val activity: AppCompatActivity,
+    val activity: AppCompatActivity,
     private val appCompositionRoot: AppCompositionRoot
 ) {
     val screenNavigator by lazy {
         ScreenNavigator(activity)
     }
+
+    val application get() = appCompositionRoot.application
 
     val fragmentManager get() = activity.supportFragmentManager
 
